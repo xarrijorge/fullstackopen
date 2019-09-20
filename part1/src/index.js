@@ -14,10 +14,10 @@ const Part = props => {
 };
 
 const Content = props => {
-  const objStore = props.objStore;
-  const { name: name1, exercises: exer1 } = objStore[0];
-  const { name: name2, exercises: exer2 } = objStore[1];
-  const { name: name3, exercises: exer3 } = objStore[2];
+  const parts = props.parts;
+  const { name: name1, exercises: exer1 } = parts[0];
+  const { name: name2, exercises: exer2 } = parts[1];
+  const { name: name3, exercises: exer3 } = parts[2];
   return (
     <Fragment>
       <Part name={name1} exercises={exer1} />
@@ -28,11 +28,11 @@ const Content = props => {
 };
 
 const Total = props => {
-  const store = props.store;
+  const parts = props.parts;
   const [exer1, exer2, exer3] = [
-    store[0].exercises,
-    store[1].exercises,
-    store[2].exercises,
+    parts[0].exercises,
+    parts[1].exercises,
+    parts[2].exercises,
   ];
   return <p>Number of exercises {exer1 + exer2 + exer3}</p>;
 };
@@ -57,8 +57,8 @@ const App = () => {
   return (
     <>
       <Header course={course} />
-      <Content objStore={parts} />
-      <Total store={parts} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </>
   );
 };
