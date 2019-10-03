@@ -1,20 +1,19 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Header = props => {
-  return <h1>{props.course.name}</h1>;
+const Header = ({ course }) => {
+  return <h1>{course.name}</h1>;
 };
 
-const Part = props => {
+const Part = ({ name, exercises }) => {
   return (
     <p>
-      {props.name} {props.exercises}
+      {name} {exercises}
     </p>
   );
 };
 
-const Content = props => {
-  const course = props.course.course;
+const Content = ({ course }) => {
   const { name: name1, exercises: exer1 } = course[0];
   const { name: name2, exercises: exer2 } = course[1];
   const { name: name3, exercises: exer3 } = course[2];
@@ -58,7 +57,7 @@ const App = () => {
   return (
     <>
       <Header course={course} />
-      <Content course={course} />
+      <Content course={course.course} />
       <Total course={course} />
     </>
   );
