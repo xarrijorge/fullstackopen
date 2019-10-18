@@ -2,13 +2,16 @@ import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const Statistic = ({ text, value }) => {
+const Statistic = ({ text, value, key }) => {
   return (
-    <ul>
-      <li>
-        {text} <span>{value}</span>
-      </li>
-    </ul>
+    <table>
+      <tbody>
+        <tr>
+          <td>{text}</td>
+          <td>{value}</td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
@@ -23,7 +26,7 @@ const App = () => {
   const [stats, setStats] = useState([]);
   const all = stats.length;
   const avg = (good * 1 + bad * -1) / all || 0;
-  const perc = (good * 100) / all || 0;
+  const perc = `${(good * 100) / all || 0} %`;
 
   const setToGood = () => {
     setStats(stats.concat('G'));
@@ -45,13 +48,20 @@ const App = () => {
       <Button text="Neutral" handleClick={() => setToNeutral()} />
       <Button text="Bad" handleClick={() => setToBad()} />
       <h2>Statistics</h2>
-      <Statistic text="Good" value={good} />
-      <Statistic text="Neutral" value={neutral} />
-      <Statistic text="Bad" value={bad} />
-      <Statistic text="All" value={all} />
-      <Statistic text="Average" value={avg} />
-      <Statistic text="Percentage" value={perc} />
+      {stats.length > 0 ? (
+        <>
+          <Statistic text="Good" value={good} />
+          <Statistic text="Neutral" value={neutral} />
+          <Statistic text="Bad" value={bad} />
+          <Statistic text="All" value={all} />
+          <Statistic text="Average" value={avg} />
+          <Statistic text="Positive" value={perc} />
+        </>
+      ) : (
+        'No feedback given'
+      )}
     </Fragment>
   );
 };
+ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<App />, document.getElementById('root'));

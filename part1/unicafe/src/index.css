@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 20px;
   font-family: serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,10 +9,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-ul {
-  padding: 0;
-  margin: 0;
+table {
+  border-collapse: collapse;
+  font-size: 1.2rem;
 }
-li {
-  list-style-type: none;
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+td {
+  width: 70px;
+}
+td:nth-child(2) {
+  text-align: right;
 }
