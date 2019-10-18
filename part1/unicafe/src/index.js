@@ -6,14 +6,18 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [stats, setStats] = useState([]);
 
   const setToGood = () => {
+    setStats(stats.concat('G'));
     setGood(good + 1);
   };
   const setToNeutral = () => () => {
+    setStats(stats.concat('N'));
     setNeutral(neutral + 1);
   };
   const setToBad = () => () => {
+    setStats(stats.concat('B'));
     setBad(bad + 1);
   };
 
