@@ -38,6 +38,10 @@ const Statistics = props => {
   );
 };
 
+const Button = props => {
+  return <button onClick={props.handleClick}>{props.text}</button>;
+};
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -48,11 +52,11 @@ const App = () => {
     setStats(stats.concat('G'));
     setGood(good + 1);
   };
-  const setToNeutral = () => () => {
+  const setToNeutral = () => {
     setStats(stats.concat('N'));
     setNeutral(neutral + 1);
   };
-  const setToBad = () => () => {
+  const setToBad = () => {
     setStats(stats.concat('B'));
     setBad(bad + 1);
   };
@@ -60,13 +64,12 @@ const App = () => {
   return (
     <Fragment>
       <h2> Give Feedback</h2>
-      <button onClick={() => setToGood()}>Good</button>
-      <button onClick={setToNeutral()}>Neutral</button>
-      <button onClick={setToBad()}>Bad</button>
+      <Button text="Good" handleClick={() => setToGood()} />
+      <Button text="Neutral" handleClick={() => setToNeutral()} />
+      <Button text="Bad" handleClick={() => setToBad()} />
       <h2>Statistics</h2>
       <Statistics stats={stats} good={good} bad={bad} neutral={neutral} />
     </Fragment>
   );
 };
-ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<App />, document.getElementById('root'));
