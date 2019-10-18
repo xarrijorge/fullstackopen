@@ -2,39 +2,13 @@ import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const Statistics = props => {
-  const good = props.good;
-  const bad = props.bad;
-  const neutral = props.neutral;
-  const stats = props.stats;
-
-  const all = stats.length;
-  const avg = (good * 1 + bad * -1) / all;
-  const perc = (good * 100) / all || 0;
-
-  return stats.length > 0 ? (
+const Statistic = ({ text, value }) => {
+  return (
     <ul>
       <li>
-        good <span>{good}</span>
-      </li>
-      <li>
-        neutral <span>{neutral}</span>
-      </li>
-      <li>
-        bad <span>{bad}</span>
-      </li>
-      <li>
-        all <span>{all}</span>
-      </li>
-      <li>
-        average <span>{avg}</span>
-      </li>
-      <li>
-        positive <span>{perc}</span> %
+        {text} <span>{value}</span>
       </li>
     </ul>
-  ) : (
-    'No Feedback Given!'
   );
 };
 
@@ -47,6 +21,9 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
   const [stats, setStats] = useState([]);
+  const all = stats.length;
+  const avg = (good * 1 + bad * -1) / all || 0;
+  const perc = (good * 100) / all || 0;
 
   const setToGood = () => {
     setStats(stats.concat('G'));
@@ -68,7 +45,12 @@ const App = () => {
       <Button text="Neutral" handleClick={() => setToNeutral()} />
       <Button text="Bad" handleClick={() => setToBad()} />
       <h2>Statistics</h2>
-      <Statistics stats={stats} good={good} bad={bad} neutral={neutral} />
+      <Statistic text="Good" value={good} />
+      <Statistic text="Neutral" value={neutral} />
+      <Statistic text="Bad" value={bad} />
+      <Statistic text="All" value={all} />
+      <Statistic text="Average" value={avg} />
+      <Statistic text="Percentage" value={perc} />
     </Fragment>
   );
 };
