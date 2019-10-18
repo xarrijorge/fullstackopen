@@ -22,8 +22,8 @@ const App = () => {
   };
 
   const all = stats.length;
-  const avg = 0;
-  const perc = 0;
+  const avg = (good * 1 + bad * -1) / all || 0;
+  const perc = (good * 100) / all || 0;
 
   return (
     <Fragment>
@@ -33,12 +33,24 @@ const App = () => {
       <button onClick={setToBad()}>Bad</button>
       <h2>Statistics</h2>
       <ul>
-        <li>good {good}</li>
-        <li>neutral {neutral}</li>
-        <li>bad {bad}</li>
-        <li>all{all}</li>
-        <li>average {avg}</li>
-        <li>positive {perc}</li>
+        <li>
+          good <span>{good}</span>
+        </li>
+        <li>
+          neutral <span>{neutral}</span>
+        </li>
+        <li>
+          bad <span>{bad}</span>
+        </li>
+        <li>
+          all <span>{all}</span>
+        </li>
+        <li>
+          average <span>{avg}</span>
+        </li>
+        <li>
+          positive <span>{perc}</span> %
+        </li>
       </ul>
     </Fragment>
   );
