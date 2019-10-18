@@ -14,12 +14,6 @@ table {
   font-size: 1.2rem;
 }
 
-table,
-th,
-td {
-  border: 1px solid black;
-}
-
 td {
   width: 70px;
 }
