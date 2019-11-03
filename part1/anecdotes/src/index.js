@@ -8,20 +8,35 @@ const Button = props => {
 const App = props => {
   const [selected, setSelected] = useState(0);
   const [message, setMessage] = useState('');
-  const [vote, setVote] = useState(0);
+  const [vote, setVote] = useState('');
   let points = new Uint8Array(props.anecdotes.length);
-  const [copy, setCopy] = useState([...points]);
+  let copy = [...points];
   let rand = Math.floor(Math.random() * props.anecdotes.length);
 
-  useEffect(() => {
+  const updateApp = () => {
     setMessage(props.anecdotes[selected][0]);
-  }, [props.anecdotes, selected]);
+    setVote(copy[selected]);
+  };
+
+  const updateVote = () => {
+    let that = copy[selected];
+    console.log(that);
+    that = that + 1;
+    console.log(that);
+    return that;
+  };
+
+  useEffect(() => {
+    updateApp();
+    updateVote();
+    console.log(copy);
+  });
 
   return (
     <div>
       <h2>{message}</h2>
-      <h3>{vote}</h3>
-      <Button handleClick={() => setCopy()} text={'Vote'} />
+      <h3>{copy[selected]}</h3>
+      <Button handleClick={() => updateVote()} text={'Vote'} />
       <Button handleClick={() => setSelected(rand)} text={'Next Quote'} />
     </div>
   );
