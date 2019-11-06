@@ -1,0 +1,22 @@
+body {
+  margin: 20px;
+  font-family: serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+table {
+  border-collapse: collapse;
+  font-size: 1.2rem;
+}
+
+td {
+  width: 70px;
+}
+td:nth-child(2) {
+  text-align: right;
+}
