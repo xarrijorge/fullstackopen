@@ -18,7 +18,7 @@ const App = props => {
     setVote(copy[selected]);
   };
 
-  const updateCopy = () => {
+  const updateVote = () => {
     let point = copy[selected];
     let newCopy = [...copy];
     point += 1;
@@ -33,9 +33,14 @@ const App = props => {
   return (
     <div>
       <h2>{message}</h2>
-      <h3>{vote}</h3>
-      <Button handleClick={() => updateCopy()} text={'Vote'} />
+      <h3>{`has ${vote} votes`}</h3>
+      <Button handleClick={() => updateVote()} text={'Vote'} />
       <Button handleClick={() => setSelected(rand)} text={'Next Quote'} />
+      <section>
+        <h1> Anecdote With Most Votes</h1>
+        <h3>{props.anecdotes[copy.indexOf(Math.max(...copy))]}</h3>
+        <h4>{`has ${Math.max(...copy)} votes`}</h4>
+      </section>
     </div>
   );
 };
