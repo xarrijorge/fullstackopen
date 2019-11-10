@@ -5,7 +5,7 @@ import React, {
 import Course from './components/course';
 
 
-const App = () => {
+const App = (props) => {
     const courses = [{
         name: 'Half Stack application development',
         id: 1,
