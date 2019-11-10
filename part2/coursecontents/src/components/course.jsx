@@ -14,14 +14,15 @@ const Part = ({ name, exercises }) => {
 
 const Content = ({ course }) => {
   const data = course.course;
-  const { name: name1, exercises: exer1 } = data[0];
-  const { name: name2, exercises: exer2 } = data[1];
-  const { name: name3, exercises: exer3 } = data[2];
+
+  let result = data.map(element => {
+    return <Part name={element.name} exercises={element.exercises} /> 
+  });
+
   return (
     <Fragment>
-      <Part name={name1} exercises={exer1} />
-      <Part name={name2} exercises={exer2} />
-      <Part name={name3} exercises={exer3} />
+      {/* <Part name={data[0].name} exercises={data[0].exercises} /> */}
+      {result}
     </Fragment>
   );
 };
@@ -29,8 +30,8 @@ const Content = ({ course }) => {
 const Total = ({course})=> {
   const parts = course.course;
 
-  let total = parts.reduce((a,b) => a.exercises + b.exercises, 0); 
-  console.log(total);
+  let total = 0;
+  parts.forEach((x) => { console.log(x); return total +=x.exercises;}); 
   return <p><strong>Number of exercises {total}</strong></p>;
 };
 
