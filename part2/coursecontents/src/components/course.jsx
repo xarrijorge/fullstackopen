@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react';
 
 const Header = ({course})=> {
-  return <h1>{course.name}</h1>;
+  return <h2 className="header">{course.name}</h2>;
 };
 
 const Part = ({ name, exercises }) => {
   return (
-    <p>
-      {name} {exercises}
-    </p>
+    <div className="contentBox">
+      <p>{name}</p> <p className="exer">{exercises}</p>
+    </div>
   ); 
 };
 
 const Content = ({ course }) => {
-  const data = course.course;
+  const data = course.parts;
 
   let result = data.map(element => {
     return <Part name={element.name} exercises={element.exercises} /> 
@@ -28,12 +28,10 @@ const Content = ({ course }) => {
 };
 
 const Total = ({course})=> {
-  const parts = course.course;
-
-  let total = 0;
-  parts.forEach((x) => { console.log(x); return total +=x.exercises;}); 
-  return <p><strong>Number of exercises {total}</strong></p>;
-};
+  const parts = course.parts;
+  let total = parts.reduce((a,b) => { return a + b.exercises}, 0);
+  return <div className="totalBox">total of {total} exercises</div>; 
+ };
 
 const Course = ({course}) => {
     return (
