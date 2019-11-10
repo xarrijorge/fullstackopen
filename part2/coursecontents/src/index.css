@@ -15,11 +15,12 @@ code {
   display: grid;
   grid-template-columns: 80% 20%;
 }
-.exer{
+
+.exer {
   text-align: right;
 }
 
-.totalBox{
+.totalBox {
   font-weight: bold;
   width: 50vw;
 }
