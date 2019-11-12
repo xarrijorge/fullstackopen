@@ -1,5 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 
+import Search from "./components/search";
+import AddContact from "./components/addContact";
+import ShowContacts from "./components/showContacts";
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456" },
@@ -55,27 +59,16 @@ const App = () => {
     <Fragment>
       <h2> Phonebook </h2>
       <form onSubmit={handlePersons}>
-        <p>
-          filter shown with
-          <input type="search" onChange={handleSearch} />
-        </p>
-        <div>
-          <h2>add a new</h2>
-          <p>
-            name: <input type="text" value={newName} onChange={handleName} />
-          </p>
-          <p>
-            number:
-            <input type="tel" value={newNumber} onChange={handleNumber} />
-          </p>
-        </div>
-        <div>
-          <button type="submit" disabled={buttonStatus}>
-            add
-          </button>
-        </div>
+        <Search search={handleSearch} />
+        <AddContact
+          newName={newName}
+          handleName={handleName}
+          newNumber={newNumber}
+          handleNumber={handleNumber}
+          buttonStatus={buttonStatus}
+        />
+        <ShowContacts people={people} />
       </form>
-      <h2> Numbers </h2> {people} <div></div>
     </Fragment>
   );
 };
