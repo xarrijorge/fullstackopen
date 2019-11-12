@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 
 import Search from "./components/search";
 import AddContact from "./components/addContact";
@@ -16,7 +16,7 @@ const App = () => {
   const [filtered, setFilterd] = useState([]);
   const [newFilter, setNewFilter] = useState("");
 
-  let buttonStatus = newName == "" || newNumber == "" ? true : false;
+  let buttonStatus = newName === "" || newNumber === "" ? true : false;
 
   const handleName = event => {
     setNewName(event.target.value);
