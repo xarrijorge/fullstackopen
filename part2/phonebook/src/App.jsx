@@ -2,13 +2,15 @@ import React, { Fragment, useState, useEffect } from "react";
 
 const App = () => {
   const [persons, setPersons] = useState([
-    {
-      name: "Arto Hellas",
-      tel: "040-1234567"
-    }
+    { name: "Arto Hellas", number: "040-123456" },
+    { name: "Ada Lovelace", number: "39-44-5323523" },
+    { name: "Dan Abramov", number: "12-43-234345" },
+    { name: "Mary Poppendieck", number: "39-23-6423122" }
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [filtered, setFilterd] = useState([]);
+  const [newFilter, setNewFilter] = useState("");
 
   let buttonStatus = newName == "" || newNumber == "" ? true : false;
 
@@ -20,10 +22,17 @@ const App = () => {
     setNewNumber(event.target.value);
   };
 
-  let people = persons.map((person, i) => (
+  const handleSearch = event => {
+    setNewFilter(String(event.target.value));
+    let data = persons.filter(elem => elem.name.includes(newFilter));
+    setFilterd(data);
+  };
+
+  let display = newFilter !== "" ? filtered : persons;
+  let people = display.map((person, i) => (
     <p key={i}>
       {" "}
-      {person.name} {person.tel}
+      {person.name} {person.number}
     </p>
   ));
 
@@ -31,7 +40,7 @@ const App = () => {
     event.preventDefault();
     let person = {
       name: newName,
-      tel: newNumber
+      number: newNumber
     };
 
     let duplicate = persons.some(elem => newName === elem.name);
@@ -46,7 +55,12 @@ const App = () => {
     <Fragment>
       <h2> Phonebook </h2>
       <form onSubmit={handlePersons}>
+        <p>
+          filter shown with
+          <input type="search" onChange={handleSearch} />
+        </p>
         <div>
+          <h2>add a new</h2>
           <p>
             name: <input type="text" value={newName} onChange={handleName} />
           </p>
