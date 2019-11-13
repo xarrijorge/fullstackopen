@@ -24,7 +24,6 @@ const App = () => {
     filtered.length <= 10
       ? display.map((state, i) => <p key={i}>{state.name}</p>)
       : "Too many matches, specify another filter ";
-
   useEffect(() => {
     axios.get("https://restcountries.eu/rest/v2/all").then(res => {
       let data = res.data;
