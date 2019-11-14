@@ -42,22 +42,24 @@ const App = () => {
       name: newName,
       number: newNumber
     };
+    axios
+      .post("http://localhost:3001/persons", person)
+      .then(res => console.log(res));
+    setNewName("");
+    setNewNumber("");
 
-    let duplicate = persons.some(elem => newName === elem.name);
-    if (duplicate) {
-      alert(`${newName} is already added to the phonebook`);
-    } else {
-      setPersons(persons.concat(person));
-      setNewName("");
-    }
+    // let duplicate = persons.some(elem => newName === elem.name);
+    // if (duplicate) {
+    //   alert(`${newName} is already added to the phonebook`);
+    // } else {
+    // }
   };
 
   useEffect(() => {
     axios.get("http://localhost:3001/persons").then(res => {
-      console.log(res);
       setPersons(res.data);
     });
-  }, []);
+  });
 
   return (
     <Fragment>
