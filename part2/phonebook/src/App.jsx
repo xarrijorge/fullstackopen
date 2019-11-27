@@ -4,6 +4,7 @@ import Search from "./components/search";
 import AddContact from "./components/addContact";
 import ShowContacts from "./components/showContacts";
 import Person from "./components/person";
+import Notification from "./components/notification"
 import contactService from "./services/contacts";
 
 const App = () => {
@@ -12,7 +13,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [filtered, setFilterd] = useState([]);
   const [newFilter, setNewFilter] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [messageClass, setMessageClass] = useState("");
   let buttonStatus = newName === "" || newNumber === "" ? true : false;
 
   const addContact = event => {
@@ -29,10 +31,23 @@ const App = () => {
       contactService.create(person).then(res => console.log(res));
       setNewName("");
       setNewNumber("");
+      setErrorMessage(`Added ${person.name}`);
+      setMessageClass("success");
+      setTimeout(() => {
+        setErrorMessage(null);
+      },5000)
+
     }else{
       if(window.confirm(`${person.name} is already added to contacts. Replace old number with new one?`)){
         let elem = persons.find(elem => elem.name === person.name);
-        contactService.update(elem.id, person);
+        contactService.update(elem.id, person).catch(err =>{
+          setErrorMessage(`contact ${person.name} was already deleted`);
+          setMessageClass("error");
+          setTimeout(() =>{
+            setErrorMessage(null);
+          }, 5000);
+          setPersons(persons.filter(person => elem.id !== person.id ))
+        });
         setNewName("");
         setNewNumber("");
       }
@@ -90,12 +105,14 @@ const App = () => {
       setPersons(allContacts);
     });
   }, []);
-
+  const notification = errorMessage ? <Notification message={errorMessage} messageClass={messageClass}/> : null;
   return (
     <Fragment>
       <h1> Phonebook </h1>
+      {notification}
       <form>
         <Search search={handleSearch} />
+        <h2>Add a new contact</h2>
         <AddContact
           newName={newName}
           handleName={handleName}

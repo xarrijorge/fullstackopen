@@ -1,12 +1,13 @@
 import React from 'react';
+import { tsPropertySignature } from '@babel/types';
 
-const Notification = ({ message }) => {
+const Notification = ({ message, messageClass }) => {
     if (message === null) {
       return null
     }
   
     return (
-      <div className="error">
+      <div className={messageClass}>
         {message}
       </div>
     )

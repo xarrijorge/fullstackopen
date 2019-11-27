@@ -4,7 +4,6 @@ const AddContact = props => {
   return (
     <div>
       <div>
-        <h2>add a new</h2>
         <p>
           name:{" "}
           <input

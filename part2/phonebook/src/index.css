@@ -19,6 +19,29 @@ h1{
 
 .person{
   color: grey;
-  font-size: 15px;
+  font-size: 20px;
   padding-top: 3px;
+}
+
+button{
+  margin: 4px;
+}
+
+.error {
+  color: red;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.success {
+  color: green;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
