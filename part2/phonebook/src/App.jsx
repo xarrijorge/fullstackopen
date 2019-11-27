@@ -93,7 +93,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <h2> Phonebook </h2>
+      <h1> Phonebook </h1>
       <form>
         <Search search={handleSearch} />
         <AddContact
@@ -104,6 +104,7 @@ const App = () => {
           buttonStatus={buttonStatus}
           handleClick={addContact}
         />
+        <h2> Numbers </h2>
         <ShowContacts people={people} />
       </form>
     </Fragment>
