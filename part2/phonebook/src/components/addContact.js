@@ -23,7 +23,7 @@ const AddContact = props => {
         </p>
       </div>
       <div>
-        <button type="submit" disabled={props.buttonStatus}>
+        <button onClick={props.handleClick} disabled={props.buttonStatus}>
           add
         </button>
       </div>
