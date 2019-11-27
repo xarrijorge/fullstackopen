@@ -3,52 +3,92 @@
     {
       "name": "Arto Hellas",
       "number": "040-123456",
+      "important": true,
       "id": 1
     },
     {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
+      "important": false,
       "id": 2
     },
     {
       "name": "Dan Abramov",
       "number": "12-43-234345",
+      "important": true,
       "id": 3
     },
     {
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
+      "important": false,
       "id": 4
     },
     {
       "name": "big man ",
       "number": "+334294-332",
+      "important": true,
       "id": 5
     },
     {
       "name": "Another Big man",
       "number": "+01223-4532",
+      "important": true,
       "id": 6
     },
     {
-      "name": "A little lil man",
-      "number": "098378920",
+      "name": "a little lil man",
+      "number": "09985439389",
+      "important": true,
       "id": 7
     },
     {
       "name": "Poor young dave",
       "number": "00123",
+      "important": false,
       "id": 8
     },
     {
       "name": "Snoop",
       "number": "007",
+      "important": false,
       "id": 9
     },
     {
       "name": "Cent",
       "number": "50",
+      "important": true,
       "id": 10
+    },
+    {
+      "name": "Eric badio",
+      "number": "+334291808",
+      "important": false,
+      "id": 11
+    },
+    {
+      "name": "General Abel",
+      "number": "+231776889452",
+      "important": false,
+      "id": 12
+    },
+    {
+      "name": "General Sackie",
+      "number": "+233998675998",
+      "important": false,
+      "id": 13
+    },
+    {
+      "name": "Ayo Babe",
+      "number": "+231776991644",
+      "important": true,
+      "id": 14
+    },
+    {
+      "name": "",
+      "number": "",
+      "important": false,
+      "id": 15
     }
   ]
 }
