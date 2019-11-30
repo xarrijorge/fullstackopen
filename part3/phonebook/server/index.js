@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
+app.use(bodyParser.json());
 const PORT = 3001;
 
 let contacts = [
@@ -100,7 +102,34 @@ app.delete("/contacts/:id", (req, res) => {
   const id = Number(req.params.id);
   contacts = contacts.filter(contact => contact.id !== id);
 
-  res.status(204).end
+  res.status(204);
+  res.end();
+});
+
+const generateId = () => {
+  const maxId = contacts.length > 0 ? Math.max(...contacts.map(n => n.id)) : 0;
+  return maxId + 1;
+};
+
+app.post("/contacts", (req, res) => {
+  const body = req.body;
+
+  if (!body.name || !body.number) {
+    return res.status(400).json({
+      error: "missing name or number"
+    });
+  }
+
+  const contact = {
+    name: body.name,
+    number: body.number,
+    important: body.important || false,
+    date: new Date(),
+    id: generateId()
+  };
+  console.log("this is the", contact);
+
+  res.json(contact);
 });
 
 app.listen(PORT, () => {
