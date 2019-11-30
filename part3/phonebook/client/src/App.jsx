@@ -4,8 +4,9 @@ import Search from "./components/search";
 import AddContact from "./components/addContact";
 import ShowContacts from "./components/showContacts";
 import Person from "./components/person";
-import Notification from "./components/notification"
+import Notification from "./components/notification";
 import contactService from "./services/contacts";
+import Axios from "axios";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,7 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [filtered, setFilterd] = useState([]);
   const [newFilter, setNewFilter] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
   const [messageClass, setMessageClass] = useState("");
   let buttonStatus = newName === "" || newNumber === "" ? true : false;
 
@@ -35,25 +36,27 @@ const App = () => {
       setMessageClass("success");
       setTimeout(() => {
         setErrorMessage(null);
-      },5000)
-
-    }else{
-      if(window.confirm(`${person.name} is already added to contacts. Replace old number with new one?`)){
+      }, 5000);
+    } else {
+      if (
+        window.confirm(
+          `${person.name} is already added to contacts. Replace old number with new one?`
+        )
+      ) {
         let elem = persons.find(elem => elem.name === person.name);
-        contactService.update(elem.id, person).catch(err =>{
+        contactService.update(elem.id, person).catch(err => {
           setErrorMessage(`contact ${person.name} was already deleted`);
           setMessageClass("error");
-          setTimeout(() =>{
+          setTimeout(() => {
             setErrorMessage(null);
           }, 5000);
-          setPersons(persons.filter(person => elem.id !== person.id ))
+          setPersons(persons.filter(person => elem.id !== person.id));
         });
         setNewName("");
         setNewNumber("");
       }
     }
-   
-  }
+  };
 
   const handleName = event => {
     setNewName(event.target.value);
@@ -87,6 +90,10 @@ const App = () => {
         setPersons(persons.map(person => person));
       });
     }
+
+    Axios.delete(
+      `https://floating-bayou-11024.herokuapp.com/api/persons/${contact.id}`
+    );
   };
 
   let display = newFilter !== "" ? filtered : persons;
@@ -105,7 +112,9 @@ const App = () => {
       setPersons(allContacts);
     });
   }, []);
-  const notification = errorMessage ? <Notification message={errorMessage} messageClass={messageClass}/> : null;
+  const notification = errorMessage ? (
+    <Notification message={errorMessage} messageClass={messageClass} />
+  ) : null;
   return (
     <Fragment>
       <h1> Phonebook </h1>
