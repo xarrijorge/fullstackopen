@@ -1,39 +1,39 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from 'react';
 
-import Search from "./components/search";
-import AddContact from "./components/addContact";
-import ShowContacts from "./components/showContacts";
-import Person from "./components/person";
-import Notification from "./components/notification";
-import contactService from "./services/contacts";
-import Axios from "axios";
+import Search from './components/search';
+import AddContact from './components/addContact';
+import ShowContacts from './components/showContacts';
+import Person from './components/person';
+import Notification from './components/notification';
+import contactService from './services/contacts';
+import Axios from 'axios';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
+  const [newName, setNewName] = useState('');
+  const [newNumber, setNewNumber] = useState('');
   const [filtered, setFilterd] = useState([]);
-  const [newFilter, setNewFilter] = useState("");
+  const [newFilter, setNewFilter] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
-  const [messageClass, setMessageClass] = useState("");
-  let buttonStatus = newName === "" || newNumber === "" ? true : false;
+  const [messageClass, setMessageClass] = useState('');
+  let buttonStatus = !newName || !newNumber;
 
   const addContact = event => {
     event.preventDefault();
     let person = {
       name: newName,
       number: newNumber,
-      important: Math.random() > 0.5
+      important: Math.random() > 0.5,
     };
 
     const duplicate = persons.some(elem => elem.name === person.name);
     if (!duplicate) {
       console.log(person);
       contactService.create(person).then(res => console.log(res));
-      setNewName("");
-      setNewNumber("");
+      setNewName('');
+      setNewNumber('');
       setErrorMessage(`Added ${person.name}`);
-      setMessageClass("success");
+      setMessageClass('success');
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
@@ -46,14 +46,14 @@ const App = () => {
         let elem = persons.find(elem => elem.name === person.name);
         contactService.update(elem.id, person).catch(err => {
           setErrorMessage(`contact ${person.name} was already deleted`);
-          setMessageClass("error");
+          setMessageClass('error');
           setTimeout(() => {
             setErrorMessage(null);
           }, 5000);
           setPersons(persons.filter(person => elem.id !== person.id));
         });
-        setNewName("");
-        setNewNumber("");
+        setNewName('');
+        setNewNumber('');
       }
     }
   };
@@ -72,17 +72,6 @@ const App = () => {
     setFilterd(data);
   };
 
-  const toggleImportanceOf = id => {
-    const person = persons.find(p => p.id === id);
-    const changePerson = { ...person, important: !person.important };
-
-    contactService.update(id, changePerson).then(returnedContact => {
-      setPersons(
-        persons.map(person => (person.id !== id ? person : returnedContact))
-      );
-    });
-  };
-
   const deleteContact = id => {
     const contact = persons.find(person => person.id === id);
     if (window.confirm(`Do you really want to delete '${contact.name}'?`)) {
@@ -96,13 +85,12 @@ const App = () => {
     );
   };
 
-  let display = newFilter !== "" ? filtered : persons;
+  let display = newFilter !== '' ? filtered : persons;
 
   let people = display.map(person => (
     <Person
       key={person.id}
       person={person}
-      toggleImportance={() => toggleImportanceOf(person.id)}
       removeContact={() => deleteContact(person.id)}
     />
   ));
