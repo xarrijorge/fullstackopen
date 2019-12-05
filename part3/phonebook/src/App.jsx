@@ -22,41 +22,40 @@ const App = () => {
     event.preventDefault();
     let person = {
       name: newName,
-      number: newNumber,
-      important: Math.random() > 0.5
+      number: newNumber
     };
 
-    // const duplicate = persons.some(elem => elem.name === person.name);
-    // if (!duplicate) {
-    // console.log(person);
-    contactService.create(person).then(res => console.log(res));
-    setNewName("");
-    setNewNumber("");
-    setErrorMessage(`Added ${person.name}`);
-    setMessageClass("success");
-    setTimeout(() => {
-      setErrorMessage(null);
-    }, 5000);
-    // }
-    //else {
-    //   if (
-    //     window.confirm(
-    //       `${person.name} is already added to contacts. Replace old number with new one?`
-    //     )
-    //   ) {
-    //     let elem = persons.find(elem => elem.name === person.name);
-    //     contactService.update(elem.id, person).catch(err => {
-    //       setErrorMessage(`contact ${person.name} was already deleted`);
-    //       setMessageClass('error');
-    //       setTimeout(() => {
-    //         setErrorMessage(null);
-    //       }, 5000);
-    //       setPersons(persons.filter(person => elem.id !== person.id));
-    //     });
-    //     setNewName('');
-    //     setNewNumber('');
-    //   }
-    // }
+    const duplicate = persons.some(elem => elem.name === person.name);
+    if (!duplicate) {
+      console.log(person);
+      contactService.create(person).then(res => console.log(res));
+      setNewName("");
+      setNewNumber("");
+      setErrorMessage(`Added ${person.name}`);
+      setMessageClass("success");
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    } else {
+      if (
+        window.confirm(
+          `${person.name} is already added to contacts. Replace old number with new one?`
+        )
+      ) {
+        let elem = persons.find(elem => elem.name === person.name);
+        contactService.update(elem.id, person);
+        // .catch(err => {
+        //   setErrorMessage(`contact ${person.name} was already deleted`);
+        //   setMessageClass("error");
+        //   setTimeout(() => {
+        //     setErrorMessage(null);
+        //   }, 5000);
+        //   setPersons(persons.filter(person => elem.id !== person.id));
+        // });
+        setNewName("");
+        setNewNumber("");
+      }
+    }
   };
 
   const handleName = event => {
