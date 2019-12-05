@@ -5,7 +5,7 @@ import AddContact from "./components/addContact";
 import ShowContacts from "./components/showContacts";
 import Person from "./components/person";
 import Notification from "./components/notification";
-import contactService from "./services/contacts";
+import contactService from "./services/contactsService";
 import Axios from "axios";
 
 const App = () => {
@@ -28,14 +28,25 @@ const App = () => {
     const duplicate = persons.some(elem => elem.name === person.name);
     if (!duplicate) {
       console.log(person);
-      contactService.create(person).then(res => console.log(res));
-      setNewName("");
-      setNewNumber("");
-      setErrorMessage(`Added ${person.name}`);
-      setMessageClass("success");
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
+      contactService
+        .create(person)
+        .then(res => {
+          console.log(res);
+          setNewName("");
+          setNewNumber("");
+          setErrorMessage(`Added ${person.name}`);
+          setMessageClass("success");
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
+        })
+        .catch(error => {
+          const message = error.response.data;
+          console.log(message);
+          setErrorMessage(message.error);
+          setMessageClass("error");
+          setTimeout(() => setErrorMessage(null), 5000);
+        });
     } else {
       if (
         window.confirm(
@@ -43,15 +54,17 @@ const App = () => {
         )
       ) {
         let elem = persons.find(elem => elem.name === person.name);
-        contactService.update(elem.id, person);
-        // .catch(err => {
-        //   setErrorMessage(`contact ${person.name} was already deleted`);
-        //   setMessageClass("error");
-        //   setTimeout(() => {
-        //     setErrorMessage(null);
-        //   }, 5000);
-        //   setPersons(persons.filter(person => elem.id !== person.id));
-        // });
+        contactService
+          .update(elem.id, person)
+          .then(res => console.log(res))
+          .catch(err => {
+            setErrorMessage(`contact ${person.name} was already deleted`);
+            setMessageClass("error");
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 5000);
+            setPersons(persons.filter(person => elem.id !== person.id));
+          });
         setNewName("");
         setNewNumber("");
       }
