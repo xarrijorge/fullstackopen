@@ -1,21 +1,21 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from 'react';
 
-import Search from "./components/search";
-import AddContact from "./components/addContact";
-import ShowContacts from "./components/showContacts";
-import Person from "./components/person";
-import Notification from "./components/notification";
-import contactService from "./services/contactsService";
-import Axios from "axios";
+import Search from './components/search';
+import AddContact from './components/addContact';
+import ShowContacts from './components/showContacts';
+import Person from './components/person';
+import Notification from './components/notification';
+import contactService from './services/contactsService';
+import Axios from 'axios';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
+  const [newName, setNewName] = useState('');
+  const [newNumber, setNewNumber] = useState('');
   const [filtered, setFilterd] = useState([]);
-  const [newFilter, setNewFilter] = useState("");
+  const [newFilter, setNewFilter] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
-  const [messageClass, setMessageClass] = useState("");
+  const [messageClass, setMessageClass] = useState('');
   let buttonStatus = !newName || !newNumber;
 
   const addContact = event => {
@@ -32,10 +32,10 @@ const App = () => {
         .create(person)
         .then(res => {
           console.log(res);
-          setNewName("");
-          setNewNumber("");
+          setNewName('');
+          setNewNumber('');
           setErrorMessage(`Added ${person.name}`);
-          setMessageClass("success");
+          setMessageClass('success');
           setTimeout(() => {
             setErrorMessage(null);
           }, 5000);
@@ -44,7 +44,7 @@ const App = () => {
           const message = error.response.data;
           console.log(message);
           setErrorMessage(message.error);
-          setMessageClass("error");
+          setMessageClass('error');
           setTimeout(() => setErrorMessage(null), 5000);
         });
     } else {
@@ -59,14 +59,14 @@ const App = () => {
           .then(res => console.log(res))
           .catch(err => {
             setErrorMessage(`contact ${person.name} was already deleted`);
-            setMessageClass("error");
+            setMessageClass('error');
             setTimeout(() => {
               setErrorMessage(null);
             }, 5000);
             setPersons(persons.filter(person => elem.id !== person.id));
           });
-        setNewName("");
-        setNewNumber("");
+        setNewName('');
+        setNewNumber('');
       }
     }
   };
@@ -98,7 +98,7 @@ const App = () => {
     );
   };
 
-  let display = newFilter !== "" ? filtered : persons;
+  let display = newFilter !== '' ? filtered : persons;
 
   let people = display.map(person => (
     <Person

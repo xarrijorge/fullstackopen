@@ -12,18 +12,18 @@ code {
     monospace;
 }
 
-h1{
+h1 {
   color: green;
   font-style: italic;
 }
 
-.person{
+.person {
   color: grey;
   font-size: 20px;
   padding-top: 3px;
 }
 
-button{
+button {
   margin: 4px;
 }
 
@@ -36,6 +36,7 @@ button{
   padding: 10px;
   margin-bottom: 10px;
 }
+
 .success {
   color: green;
   background: lightgrey;
