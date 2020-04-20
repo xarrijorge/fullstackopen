@@ -8,13 +8,25 @@ blogsRouter.get('/', async (request, response) => {
   response.json(blogs)
 })
 
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   const user = await User.findById(body.userID)
 
-  const result = await blog.save()
-  response.status(201).json(result)
+  const blog = new Blog({
+    article: body.article,
+    date: new Date(),
+    user: user._id
+  })
+
+  try {
+    savedBlog = await blog.save()
+    user.blogs = user.blogs.concat(savedBlog._id)
+    await user.save()
+    response.json(savedBlog.toJSON())
+  } catch (exception) {
+    next(exception)
+  }
 })
 
 blogsRouter.delete('/:id', async (request, response) => {

@@ -1,7 +1,12 @@
 const mongoose = require('mongoose')
 
 const blogSchema = mongoose.Schema({
-  article: String,
+  article: {
+    type: String,
+    required: true,
+    minlength: 100
+  },
+  date: Date,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

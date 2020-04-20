@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React, { Fragment, useState } from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
 
 const Statistic = ({ text, value, key }) => {
   return (
@@ -12,34 +12,34 @@ const Statistic = ({ text, value, key }) => {
         </tr>
       </tbody>
     </table>
-  );
-};
+  )
+}
 
 const Button = props => {
-  return <button onClick={props.handleClick}>{props.text}</button>;
-};
+  return <button onClick={props.handleClick}>{props.text}</button>
+}
 
 const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-  const [stats, setStats] = useState([]);
-  const all = stats.length;
-  const avg = (good * 1 + bad * -1) / all || 0;
-  const perc = `${(good * 100) / all || 0} %`;
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const [stats, setStats] = useState([])
+  const all = stats.length
+  const avg = (good * 1 + bad * -1) / all || 0
+  const perc = `${(good * 100) / all || 0} %`
 
   const setToGood = () => {
-    setStats(stats.concat('G'));
-    setGood(good + 1);
-  };
+    setStats(stats.concat('G'))
+    setGood(good + 1)
+  }
   const setToNeutral = () => {
-    setStats(stats.concat('N'));
-    setNeutral(neutral + 1);
-  };
+    setStats(stats.concat('N'))
+    setNeutral(neutral + 1)
+  }
   const setToBad = () => {
-    setStats(stats.concat('B'));
-    setBad(bad + 1);
-  };
+    setStats(stats.concat('B'))
+    setBad(bad + 1)
+  }
 
   return (
     <Fragment>
@@ -61,7 +61,6 @@ const App = () => {
         'No feedback given'
       )}
     </Fragment>
-  );
-};
-ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<App />, document.getElementById('root'));
+  )
+}
+ReactDOM.render(<App />, document.getElementById('root'))
